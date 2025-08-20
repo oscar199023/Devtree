@@ -22,7 +22,7 @@ export const crateAccount = async (req: Request, res: Response) => {
     const handleExists = await User.findOne({ handle})
     if (handleExists) {
         const error = new Error('Nombre de usuario no disponible')
-        return res.status(409),({ error: error.message })
+        return res.status(409).json({ error: error.message })
     }
 
     const user = new User (req.body)
