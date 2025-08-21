@@ -17,7 +17,10 @@ export default function RegisterView() {
         password: '',
         password_confirmation: ''
     }
-    
+    window.onbeforeunload = () => {
+        
+        return "Estas seguro que quieres salir?"
+    }
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm({defaultValues: initialValues})
     const password1 = watch('password')
     
