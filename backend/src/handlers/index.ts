@@ -59,7 +59,7 @@ export const login = async (req: Request, res: Response) => {
         return res.status(401).json({ error: error.message })
     }
 
-    generateJWT(user)
+    const token = generateJWT({id: user._id})
 
-    res.send('Login exitoso')
+    res.send(token)
 }
