@@ -18,11 +18,11 @@ export default function LoginView() {
     formState: { errors },
   } = useForm({ defaultValues: initialValue });
 
-  const handleLogin = async (formData : LoginForm) => {
+  const handleLogin = async (formData: LoginForm) => {
     try {
 
             const {data} = await api.post(`/auth/login`, formData)
-            toast.success(data)
+            localStorage.setItem('AUTH_TOKEN', data)
             
         } catch (error) {
             if (isAxiosError(error) && error.response) {
