@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { data, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../components/ErrorMessage";
 import type { LoginForm } from "../types";
@@ -22,11 +22,10 @@ export default function LoginView() {
     try {
 
             const {data} = await api.post(`/auth/login`, formData)
-            localStorage.setItem('AUTH_TOKEN', data)
-            
+            localStorage.setItem('AUTH_TOKEN', data.token)
         } catch (error) {
             if (isAxiosError(error) && error.response) {
-                toast.error(error.response.data.error)
+                toast.error(error.response.data.message || error.response.data.message)
             }
         }
   }
@@ -38,8 +37,8 @@ export default function LoginView() {
       <form
         onSubmit={handleSubmit(handleLogin)}
         className="bg-white px-5 py-20 rounded-lg space-y-10 mt-10"
-        noValidate
-      >
+        noValidate>
+        
         <div className="grid grid-cols-1 space-y-3">
           <label htmlFor="email" className="text-2xl text-slate-500">
             E-mail
@@ -59,6 +58,7 @@ export default function LoginView() {
           />
           {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         </div>
+
         <div className="grid grid-cols-1 space-y-3">
           <label htmlFor="password" className="text-2xl text-slate-500">
             Password

@@ -33,7 +33,7 @@ export default function RegisterView() {
             reset()
         } catch (error) {
             if (isAxiosError(error) && error.response) {
-                toast.error(error.response.data.error)
+                toast.error(error.response.data.error || error.response.data.message)
             }
         }
     }
@@ -44,8 +44,8 @@ export default function RegisterView() {
             <h1 className='text-4x1 text-white font-bold'>Crear Cuenta</h1>
             <form
                 onSubmit={handleSubmit(handleRegister)}
-                className="bg-white px-5 py-20 rounded-lg space-y-10 mt-10"
-            >
+                className="bg-white px-5 py-20 rounded-lg space-y-10 mt-10">
+            
                 <div className="grid grid-cols-1 space-y-3">
                     <label htmlFor="name" className="text-2xl text-slate-500">Nombre</label>
                     <input
@@ -61,6 +61,7 @@ export default function RegisterView() {
 
                     {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
                 </div>
+                
                 <div className="grid grid-cols-1 space-y-3">
                     <label htmlFor="email" className="text-2xl text-slate-500">E-mail</label>
                     <input
@@ -78,6 +79,7 @@ export default function RegisterView() {
                     />
                     {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
                 </div>
+
                 <div className="grid grid-cols-1 space-y-3">
                     <label htmlFor="handle" className="text-2xl text-slate-500">Handle</label>
                     <input
@@ -91,6 +93,7 @@ export default function RegisterView() {
                     />
                     {errors.handle && <ErrorMessage>{errors.handle.message}</ErrorMessage>}
                 </div>
+
                 <div className="grid grid-cols-1 space-y-3">
                     <label htmlFor="password" className="text-2xl text-slate-500">Password</label>
                     <input

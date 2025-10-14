@@ -6,10 +6,12 @@ import { connectDB } from './config/db'
 import { corsConfig } from './config/cors'
 
 connectDB()
+
 const app = express()
 
 //cors
 app.use(cors(corsConfig))
+
 // Leer datos de formularios
 app.use(express.json())
 
