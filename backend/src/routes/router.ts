@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { body } from 'express-validator'
-import { crateAccount, login } from '../handlers'
+import { crateAccount, getUser, login } from '../handlers'
 import { handleInputErrors } from '../middleware/validation'
 
 const  router = Router()
@@ -41,5 +41,6 @@ router.post('/auth/login',
     login
 )
 
+router.get('/user', getUser)
 
 export default router

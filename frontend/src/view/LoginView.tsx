@@ -1,4 +1,4 @@
-import { data, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../components/ErrorMessage";
 import type { LoginForm } from "../types";
@@ -93,5 +93,5 @@ export default function LoginView() {
         </Link>
       </nav>
     </>
-  );
+  )
 }
