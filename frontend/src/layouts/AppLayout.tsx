@@ -8,9 +8,12 @@ export default function AppLayout() {
 
     const {data} = useQuery({
         queryFn: getUser,
-        queryKey: ['user']
+        queryKey: ['user'],
+        retry: 1,
+        refetchOnWindowFocus: false,
     })
     console.log(data)
+
     return (
         <>
             <header className="bg-slate-800 py-5">
