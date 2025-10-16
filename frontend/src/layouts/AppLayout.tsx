@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom"
+import { Link, Navigate, Outlet } from "react-router-dom"
 import { Toaster } from "sonner"
 import { useQuery } from "@tanstack/react-query"
 import NavigationTabs from "../components/NavigationTabs"
@@ -6,14 +6,16 @@ import { getUser } from "../api/DevTreeAPI"
 
 export default function AppLayout() {
 
-    const {data} = useQuery({
+    const {data, isLoading, isError} = useQuery({
         queryFn: getUser,
         queryKey: ['user'],
         retry: 1,
         refetchOnWindowFocus: false,
     })
-    console.log(data)
-
+    if(isLoading) return <div className="text-center mt-20 font-bold text-2xl">Cargando...</div>
+    if(isError){
+        return <Navigate to={'/auth/login'} replace={true} />
+    }
     return (
         <>
             <header className="bg-slate-800 py-5">
