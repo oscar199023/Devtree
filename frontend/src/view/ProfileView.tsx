@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form"
 import { useQueryClient } from "@tanstack/react-query"
 import ErrorMessage from "../components/ErrorMessage"   
-import { getUser } from "../api/DevTreeAPI"
 import type { ProfileForm, User } from "../types"
 
 
