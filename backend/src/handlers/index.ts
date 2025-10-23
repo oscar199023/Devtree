@@ -1,26 +1,28 @@
 import { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
 import slug from 'slug'
+import formidable from 'formidable'
 import User from "../models/User"
 import { checkPassword, hashPassword } from '../utils/auth'
 import { generateJWT } from '../utils/jwt'
+import cloudinary from '../config/cloudinary'
 
 export const crateAccount = async (req: Request, res: Response) => {
     const { email, password } = req.body
-    const userExists = await User.findOne({email})
+    const userExists = await User.findOne({ email })
     if (userExists) {
         const error = new Error('El usuario ya existe con ese mail ya existe')
         return res.status(409).json({ error: error.message })
     }
 
     const handle = slug(req.body.handle, '')
-    const handleExists = await User.findOne({ handle})
+    const handleExists = await User.findOne({ handle })
     if (handleExists) {
         const error = new Error('Nombre de usuario no disponible')
         return res.status(409).json({ error: error.message })
     }
 
-    const user = new User (req.body)
+    const user = new User(req.body)
     user.password = await hashPassword(password)
     user.handle = handle
 
@@ -40,7 +42,7 @@ export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body
 
     // Revisar si el usuario existe
-    const user = await User.findOne({email})
+    const user = await User.findOne({ email })
     if (!user) {
         const error = new Error('El usuario no existe')
         return res.status(404).json({ error: error.message })
@@ -53,13 +55,13 @@ export const login = async (req: Request, res: Response) => {
         return res.status(401).json({ error: error.message })
     }
 
-    const token = generateJWT({id: user._id})
+    const token = generateJWT({ id: user._id })
 
-    res.json({token})
+    res.json({ token })
 }
 
 export const getUser = async (req: Request, res: Response) => {
-    res.json( req.user )
+    res.json(req.user)
 }
 
 export const updateProfile = async (req: Request, res: Response) => {
@@ -68,7 +70,7 @@ export const updateProfile = async (req: Request, res: Response) => {
         const { description } = req.body
 
         const handle = slug(req.body.handle, '')
-        const handleExists = await User.findOne({ handle})
+        const handleExists = await User.findOne({ handle })
         if (handleExists && handleExists.email !== req.user.email) {
             const error = new Error('Nombre de usuario no disponible')
             return res.status(409).json({ error: error.message })
@@ -81,6 +83,22 @@ export const updateProfile = async (req: Request, res: Response) => {
         res.send('Perfil actualizado correctamente')
     } catch (e) {
         const error = new Error('Hubo un error al actualizar el perfil')
+        return res.status(500).json({ error: error.message })
+    }
+}
+
+export const uploadImage = async (req: Request, res: Response) => {
+
+    const form = formidable({ multiples: false })
+    form.parse(req, (error, fields, files) => {
+
+    })
+
+    try {
+
+
+    } catch (e) {
+        const error = new Error('Hubo un error')
         return res.status(500).json({ error: error.message })
     }
 }
