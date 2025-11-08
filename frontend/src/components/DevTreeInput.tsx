@@ -3,16 +3,22 @@ import type { DevTreeLink } from "../types"
 import { classNames } from "../utils";
 
 type DevTreeInputProps = {
-  item: DevTreeLink;
-};
-export default function DevTreeInput({ item }: DevTreeInputProps) {
-  return (
+    item: DevTreeLink
+    handleUrlChange : (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+export default function DevTreeInput({ item, handleUrlChange }: DevTreeInputProps) {
+    return (
         <div className="bg-white shadow-sm p-5 flex items-center gap-3">
             <div
             className="w-12 h-12 bg-cover"
             style={{ backgroundImage: `url('/social/icon_${item.name}.svg')` }}
             ></div>
-            <input type="text" className="flex-1 border border-gray-200 rounded-lg" />
+            <input type="text" 
+            className="flex-1 border border-gray-200 rounded-lg"
+            value={item.url}
+            onChange={handleUrlChange}
+            name={item.name}
+            />
             <Switch
                 checked={item.enabled}
                 onChange={() => {}}
