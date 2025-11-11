@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { social } from "../data/social";
 import DevTreeInput from "../components/DevTreeInput";
 import { isValidUrl } from "../utils";
 import { toast } from "sonner";
 import { updateProfile } from "../api/DevTreeAPI";
+import type { User } from "../types";
 
 export default function LinkTreeView() {
   const [devTreeLinks, setDevTreeLinks] = useState(social);
 
+  const queryClient = useQueryClient()
+  const user : User = queryClient.getQueryData(['user'])!
   const { mutate } = useMutation({
     mutationFn: updateProfile,
     onError: (error) => {
@@ -30,16 +33,22 @@ export default function LinkTreeView() {
     const updatedLinks = devTreeLinks.map((link) => {
       if (link.name === socialNetwork) {
         if (isValidUrl(link.url)) {
-          return { ...link, enabled: !link.enabled };
+          return { ...link, enabled: !link.enabled }
         } else {
           toast.error("URL no valida");
         }
       }
       return link;
-    });
-    console.log(updatedLinks);
-    setDevTreeLinks(updatedLinks);
-  };
+    })
+    setDevTreeLinks(updatedLinks)
+
+    queryClient.setQueryData(['user'], (prevData: User) => {
+      return {
+        ...prevData,
+        links: JSON.stringify(updatedLinks)
+      }
+    })
+  }
 
   return (
     <>
@@ -54,6 +63,7 @@ export default function LinkTreeView() {
         ))}
         <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition
           w-full"
+          onClick={() => mutate(user)}
         > Guardar Cambios</button>
       </div>
     </>
