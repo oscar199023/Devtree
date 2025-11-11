@@ -2,7 +2,7 @@ import { Link, Outlet } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import NavigationTabs from './NavigationTabs'
 import type { SocialNetwork, User } from '../types'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import DevTreeLink from './DevTreeLink'
 
 type DevTreeProps = {
@@ -10,7 +10,12 @@ type DevTreeProps = {
 }
 
 export default function DevTree({data}: DevTreeProps) {
-    const [enabledLinks, setEnabledLinks] = useState<SocialNetwork[]>(JSON.parse(data.links).filter((item: SocialNetwork) => item.enabled))
+    const [enabledLinks, setEnabledLinks] = useState<SocialNetwork[]>(JSON.parse(data.links)
+    .filter((item: SocialNetwork) => item.enabled))
+
+    useEffect(() => {
+        setEnabledLinks(JSON.parse(data.links).filter((item: SocialNetwork) => item.enabled))
+    }, [data])
 
     return (
         <>
