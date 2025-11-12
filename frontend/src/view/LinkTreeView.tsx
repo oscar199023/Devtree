@@ -23,30 +23,24 @@ export default function LinkTreeView() {
   })
 
   useEffect(() => {
-    const updatedData = devTreeLinks.map((item) => {
-      const userlink = JSON.parse(user.links).find((link: SocialNetwork )=> link.name === item.name)
-      if (userlink) {
-        return { ...item, url: userlink.url, enabled: userlink.enabled }
+    const updatedData = devTreeLinks.map( item => {
+      const userlink = JSON.parse(user.links).find((link: SocialNetwork) => link.name === item.name)
+      if(userlink) {
+        return { ...item, url: userlink.url, enabled: userlink.enabled}
       }
       return item
     })
-
     setDevTreeLinks(updatedData)
-  }, [])
+  },[])
 
+  
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const updatedLinks = devTreeLinks.map((link) =>
-      link.name === e.target.name ? { ...link, url: e.target.value } : link
-    )
+      link.name === e.target.name ? { ...link, url: e.target.value } : link)
     setDevTreeLinks(updatedLinks)
-    
-    queryClient.setQueryData(["user"], (prevData: User) => {
-      return {
-        ...prevData,
-        links: JSON.stringify(updatedLinks),
-      }
-    })
   }
+  
+  const links : SocialNetwork[] = JSON.parse(user.links)
 
   const handleEnableLink = (socialNetwork: string) => {
     const updatedLinks = devTreeLinks.map((link) => {
@@ -61,10 +55,24 @@ export default function LinkTreeView() {
     })
     setDevTreeLinks(updatedLinks)
 
+    let updatedItems: SocialNetwork[] = []
+    const selectedSocialNetwork = updatedLinks.find(link => link.name === socialNetwork)
+    if (selectedSocialNetwork?.enabled) {
+      const newItem = {
+        ...selectedSocialNetwork,
+        id: links.length + 1
+      }
+      updatedItems = [...links, newItem]
+    } else {
+      console.log(`Link deshabilitado`)
+    }
+
+    console.log(updatedItems)
+
     queryClient.setQueryData(["user"], (prevData: User) => {
       return {
         ...prevData,
-        links: JSON.stringify(updatedLinks),
+        links: JSON.stringify(updatedItems),
       }
     })
   }
