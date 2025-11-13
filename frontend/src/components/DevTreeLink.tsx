@@ -1,7 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import type { SocialNetwork } from "../types"
-import { TrashIcon } from '@heroicons/react/20/solid'
 
 type DevTreeLinkProps = {
     link: SocialNetwork
