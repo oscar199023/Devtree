@@ -87,7 +87,7 @@ export default function LinkTreeView() {
                 id: 0,
                 enabled: false
               }
-            } else if ( link.id > indexToUpdate ) {
+            } else if ( link.id > indexToUpdate && (indexToUpdate !== 0 && link.id === 1) ) {
               return {
                 ...link,
                 id: link.id -1
@@ -125,7 +125,7 @@ export default function LinkTreeView() {
         <button
           className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition
           w-full"
-          onClick={() => mutate(user)}
+          onClick={() => mutate(queryClient.getQueryData(["user"])!)}
         >
           {" "}
           Guardar Cambios
