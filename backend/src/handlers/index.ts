@@ -125,7 +125,7 @@ export const getUserByHandle = async (req: Request, res: Response) => {
     try {
         const { handle } = req.params
         const user = await User.findOne({ handle }).select('-password -email -__v -_id')
-        if (user) {
+        if (!user) {
             const error = new Error('Usuario no encontrado')
             return res.status(404).json({ error: error.message })
         }
