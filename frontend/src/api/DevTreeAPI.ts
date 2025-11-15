@@ -50,7 +50,7 @@ export async function getUserByHandle(handle: string){
     }
 }
 
-export async function searchByHandle(handle: string){
+export async function searchByHandle(handle : string){
     try {
         const { data } = await api.post<string>('/search', {handle})
         return data
