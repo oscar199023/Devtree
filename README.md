@@ -72,6 +72,7 @@ Inspirado en Linktree, pero desarrollado completamente desde cero con **React, N
 
 ## 📁 Estructura del Proyecto
 
+```bash
 Devtree/
 ├── backend/
 │   ├── dist/
@@ -95,7 +96,7 @@ Devtree/
 │   │   │   ├── jwt.ts
 │   │   │   ├── index.ts
 │   │   │   └── server.ts
-│   │   └── .env
+│   ├── .env
 │   ├── .gitignore
 │   ├── package-lock.json
 │   ├── package.json
@@ -162,6 +163,7 @@ Devtree/
 │   ├── tsconfig.json
 │   ├── tsconfig.node.json
 │   └── vite.config.ts
+
 
 
 
