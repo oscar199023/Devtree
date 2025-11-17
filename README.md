@@ -72,31 +72,97 @@ Inspirado en Linktree, pero desarrollado completamente desde cero con **React, N
 
 ## 📁 Estructura del Proyecto
 
-```bash
 Devtree/
 ├── backend/
+│   ├── dist/
+│   ├── node_modules/
 │   ├── src/
+│   │   ├── config/
+│   │   │   ├── cloudinary.ts
+│   │   │   ├── cors.ts
+│   │   │   └── db.ts
 │   │   ├── handlers/
+│   │   │   └── index.ts
 │   │   ├── middleware/
+│   │   │   ├── auth.ts
+│   │   │   └── validation.ts
 │   │   ├── models/
+│   │   │   └── User.ts
 │   │   ├── routes/
+│   │   │   └── router.ts
 │   │   ├── utils/
-│   │   └── server.ts
+│   │   │   ├── auth.ts
+│   │   │   ├── jwt.ts
+│   │   │   ├── index.ts
+│   │   │   └── server.ts
+│   │   └── .env
+│   ├── .gitignore
+│   ├── package-lock.json
 │   ├── package.json
 │   └── tsconfig.json
 │
-└── frontend/
-    ├── src/
-    │   ├── api/
-    │   ├── components/
-    │   ├── layouts/
-    │   ├── types/
-    │   ├── utils/
-    │   └── view/
-    │       └── main.tsx
-    ├── public/
-    ├── package.json
-    └── vite.config.ts
+├── frontend/
+│   ├── dist/
+│   ├── node_modules/
+│   ├── public/
+│   │   ├── social/
+│   │   │   ├── bg.svg
+│   │   │   ├── logo.svg
+│   │   │   └── vite.svg
+│   │   └── _redirects
+│   ├── src/
+│   │   ├── api/
+│   │   │   └── DevTreeAPI.ts
+│   │   ├── components/
+│   │   │   ├── Nav/
+│   │   │   │   ├── AdminNavigation.tsx
+│   │   │   │   ├── HomeNavigation.tsx
+│   │   │   │   ├── DevTree.tsx
+│   │   │   │   ├── DevTreeInput.tsx
+│   │   │   │   ├── DevTreeLink.tsx
+│   │   │   │   ├── ErrorMessage.tsx
+│   │   │   │   ├── HandleData.tsx
+│   │   │   │   ├── Header.tsx
+│   │   │   │   ├── Logo.tsx
+│   │   │   │   ├── NavigationTabs.tsx
+│   │   │   │   └── SearchForm.tsx
+│   │   ├── config/
+│   │   │   └── axios.ts
+│   │   ├── data/
+│   │   │   └── social.ts
+│   │   ├── layouts/
+│   │   │   ├── AppLayout.tsx
+│   │   │   └── AuthLayout.tsx
+│   │   ├── types/
+│   │   │   └── index.ts
+│   │   ├── utils/
+│   │   │   └── index.ts
+│   │   ├── view/
+│   │   │   ├── HandleView.tsx
+│   │   │   ├── HomeView.tsx
+│   │   │   ├── LinkTreeView.tsx
+│   │   │   ├── LoginView.tsx
+│   │   │   ├── NotFoundView.tsx
+│   │   │   ├── ProfileView.tsx
+│   │   │   └── RegisterView.tsx
+│   │   ├── index.css
+│   │   ├── main.tsx
+│   │   ├── router.tsx
+│   │   └── vite-env.d.ts
+│   ├── .env.local
+│   ├── .gitignore
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── README.md
+│   ├── tailwind.config.js
+│   ├── tsconfig.app.json
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   └── vite.config.ts
+
 
 
 
