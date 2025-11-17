@@ -72,30 +72,32 @@ Inspirado en Linktree, pero desarrollado completamente desde cero con **React, N
 
 ## 📁 Estructura del Proyecto
 
+```bash
 Devtree/
-│── backend/
-│ ├── src/
-│ │ ├── handlers/
-│ │ ├── middleware/
-│ │ ├── models/
-│ │ ├── routes/
-│ │ ├── utils/
-│ │ └── server.ts
-│ ├── package.json
-│ └── tsconfig.json
+├── backend/
+│   ├── src/
+│   │   ├── handlers/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── utils/
+│   │   └── server.ts
+│   ├── package.json
+│   └── tsconfig.json
 │
 └── frontend/
-├── src/
-│ ├── api/
-│ ├── components/
-│ ├── layouts/
-│ ├── types/
-│ ├── utils/
-│ ├── view/
-│ └── main.tsx
-├── public/
-├── package.json
-└── vite.config.ts
+    ├── src/
+    │   ├── api/
+    │   ├── components/
+    │   ├── layouts/
+    │   ├── types/
+    │   ├── utils/
+    │   └── view/
+    │       └── main.tsx
+    ├── public/
+    ├── package.json
+    └── vite.config.ts
+
 
 
 
